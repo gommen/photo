@@ -8,7 +8,10 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , raspistill = require('./tools/raspistill')
+  , winston = require('winston');
+
 
 var app = express();
 
@@ -28,8 +31,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+ winston.add(winston.transports.File, { filename: 'photo.log', timestamp:true});
+
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/photo', raspistill.handle_photo)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
