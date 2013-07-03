@@ -91,16 +91,19 @@ function parse_request_body(body) {
 function raspistill(params, outputstream) {
   var cmd = spawn(config.photocommand, params);
   cmd.stdout.pipe(outputstream);
+  winston.profile('raspistill');
 }
 
 
 function handle_photo(req, res) {
+  winston.profile('handle_photo');
   //Set the header 
   res.writeHead(200, {'Content-Type': 'image/jpg'});
   //Extract the parameters from the request
   var params = parse_request_body(req.body);
   //call raspistill
   raspistill(params, res);
+  winston.profile('handle_photo');
 }
 
 exports.take_photo = handle_photo;
