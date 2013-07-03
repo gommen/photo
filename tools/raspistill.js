@@ -75,8 +75,35 @@ function parse_request_body(body) {
       case 'vflip':
         params.push('-vf');
         break;
+      case 'vstab':
+        params.push('-vs');
+        break;
       case 'sharpness':
         params.push('-sh');
+        params.push(body[variable]);
+        break;
+      case 'contrast':
+        params.push('-co');
+        params.push(body[variable]);
+        break;
+      case 'brightness':
+        params.push('-br');
+        params.push(body[variable]);
+        break;
+      case 'ISO':
+        params.push('-ISO');
+        params.push(body[variable]);
+        break;
+      case 'saturation':
+        params.push('-sa');
+        params.push(body[variable]);
+        break;
+      case 'rotation':
+        params.push('-rot');
+        params.push(body[variable]);
+        break;
+      case 'ev':
+        params.push('-ev');
         params.push(body[variable]);
         break;
       default:
@@ -89,6 +116,7 @@ function parse_request_body(body) {
 }
 
 function raspistill(params, outputstream) {
+  winston.profile('raspistill');
   var cmd = spawn(config.photocommand, params);
   cmd.stdout.pipe(outputstream);
   winston.profile('raspistill');

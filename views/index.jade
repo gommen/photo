@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  div#input_area
+  div#photo_parameters
     form(name='photoattr', action='/takephoto', method='post')
       label(for='width') Width:
       input(type='text', name='width', id='width', value='1024')
@@ -17,5 +17,44 @@ block content
       input(type='checkbox', name='vflip', value='on', checked=undefined) 
       span vertical flip
       br
+      input(type='checkbox', name='vstab', value='on', checked=undefined) 
+      span Video stablisation
+      br
+      hr
+      label(for='sharpness') Sharpness(-100 to 100)
+      input(type='range', name='sharpness', id='sharpness', min='-100', max='100')
+      br
+
+      label(for='contrast') Contrast(-100 to 100)
+      input(type='range', name='contrast', id = 'contrast', min='-100', max='100')
+      br
+
+      label(for='ev') Ev(-x to x)
+      input(type='range', name='ev', id = 'ev', min='-20', max='20')
+      br
+
+      label(for='brightness') Brightness(0 to 100)
+      input(type='range', name='brightness', id = 'brightness', min='0', max='100')
+      br
+
+      label(for='saturation') Saturation(-100 to 100)
+      input(type='range', name='saturation', id = 'saturation', min='-100', max='100')
+      br
+
+      label(for='ISO') ISO
+      input(type='text', name='ISO', id = 'ISO')
+      br
+
+      label(for='rotation') Rotation(0 to 359)
+      input(type='range', name='rotation', id = 'rotation', min='0', max='359')
+      br
+
       input(type='submit', value='Submit')
+
+div
+  //-ex, --exposure  : Set exposure mode (see Notes)
+  //-awb, --awb  : Set AWB mode (see Notes)
+  //-ifx, --imxfx  : Set image effect (see Notes)
+  //-cfx, --colfx  : Set colour effect (U:V)
+  //-mm, --metering  : Set metering mode (see Notes)
 
