@@ -106,6 +106,22 @@ function parse_request_body(body) {
         params.push('-ev');
         params.push(body[variable]);
         break;
+     case 'awb_mode':
+        params.push('-awb');
+        params.push(body[variable]);
+        break;
+     case 'image_effect':
+        params.push('-ifx');
+        params.push(body[variable]);
+        break;
+     case 'exposure_mode':
+        params.push('-ex');
+        params.push(body[variable]);
+        break;
+     case 'meetering_mode':
+        params.push('-mm');
+        params.push(body[variable]);
+        break;
       default:
         winston.info('filtering away ' + variable);
         break;

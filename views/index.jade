@@ -34,7 +34,7 @@ block content
       br
 
       label(for='brightness') Brightness(0 to 100)
-      input(type='range', name='brightness', id = 'brightness', min='0', max='100', value='0')
+      input(type='range', name='brightness', id = 'brightness', min='0', max='100', value='50')
       br
 
       label(for='saturation') Saturation(-100 to 100)
@@ -48,11 +48,34 @@ block content
       label(for='rotation') Rotation(0 to 359)
       input(type='range', name='rotation', id = 'rotation', min='0', max='359', value='0')
       br
-
+      label(for='awb_mode') awb
+      select(name='awb_mode', id='awb_mode')
+        option(value='')
+        each awb_mode in awb_modes
+          option(value=awb_mode) #{awb_mode}
+      br
+      label(for='image_effect') Image effects
+      select(name='image_effect', id='image_effect')
+        option(value='')
+        each image_fx in image_effects
+          option(value=image_fx) #{image_fx}
+      br
+      label(for='exposure_mode') Exposure mode
+      select(name='exposure_mode', id='exposure_mode')
+        option(value='')
+          each exposure_mode in exposure_modes
+            option(value=exposure_mode) #{exposure_mode}
+      br
+      label(for='meetering_mode') Meetering mode
+      select(name='meetering_mode', id='meetering')
+        option(value='')
+          each meetering_mode in meetering_modes
+            option(value=meetering_mode) #{meetering_mode}
+      br
+        
       input(type='submit', value='Submit')
 
 div
-  //-ex, --exposure  : Set exposure mode (see Notes)
   //-awb, --awb  : Set AWB mode (see Notes)
   //-ifx, --imxfx  : Set image effect (see Notes)
   //-cfx, --colfx  : Set colour effect (U:V)
