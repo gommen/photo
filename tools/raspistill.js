@@ -5,7 +5,7 @@ var config = require('../config.js');
 
 //private functions
 function parse_request_body(body) {
-  var params = [];
+  var params = config.defaultphotoparams;
   var variable;
 
   for (variable in body) {
