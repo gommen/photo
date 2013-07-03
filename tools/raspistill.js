@@ -1,31 +1,50 @@
 var spawn = require('child_process').spawn;
 var winston = require("winston");
+var config = require('../config.js');
 
-var rapsitill_cmd = '/Users/michael/bin/raspistill';
-var raspistill_param = [];
-function raspistill(params, data_callback, end_callback) {
-  var cmd = spawn(rapsitill_cmd, raspistill_param);
-  cmd.stdout.on('data', data_callback);
-  cmd.stdout.on('end', end_callback);
-  cmd.on('end', end_callback);
+
+//private functions
+function parse_request_body(body) {
+  var params = [];
+  var variable;
+
+  for (variable in body) {
+    switch (variable) {
+    case 'width':
+      params.push('-w');
+      params.push(body[variable]);
+      break;
+    case 'height':
+      params.push('-h');
+      params.push(body[variable]);
+      break;
+    default:
+      winston.info('filtering away ' + variable);
+      break;
+    }
+  }
+  return params;
+}
+
+function raspistill(params, outputstream) {
+  var cmd = spawn(config.photocommand, params);
+  cmd.stdout.pipe(outputstream);
 }
 
 
 function handle_photo(req, res) {
-  //Extract the parameters from the request
   //Set the header 
   res.writeHead(200, {'Content-Type': 'image/jpg'});
+  //Extract the parameters from the request
+  var params = parse_request_body(req.body);
   //call raspistill
-  raspistill({}, function (data) {
-    res.write(data);
-    winston.info('got a chunk of data');
-
-  },
-    function (data) {
-      res.end();
-      winston.info('data stream closed');
-    }
-    );
+  raspistill(params, res);
 }
 
 exports.handle_photo = handle_photo;
+exports.test = function (req, res) {
+  var params = parse_request_body(req.body);
+  winston.info('width:' + req.body.width);
+  winston.info('height:' + req.body.height);
+  res.end(params.toString());
+};

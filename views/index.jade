@@ -3,3 +3,13 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  div#input_area
+    form(name='photoattr', action='/takephoto', method='post')
+      label(for='width') Width:
+      input(type='text', name='width', id='width', value='1024')
+      br
+      label(for='height') Height:
+      input(type='text', name='height', id='height', value='768')
+      br
+      input(type='submit', value='Submit')
+
