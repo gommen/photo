@@ -106,19 +106,19 @@ function parse_request_body(body) {
         params.push('-ev');
         params.push(body[variable]);
         break;
-     case 'awb_mode':
+      case 'awb_mode':
         params.push('-awb');
         params.push(body[variable]);
         break;
-     case 'image_effect':
+      case 'image_effect':
         params.push('-ifx');
         params.push(body[variable]);
         break;
-     case 'exposure_mode':
+      case 'exposure_mode':
         params.push('-ex');
         params.push(body[variable]);
         break;
-     case 'meetering_mode':
+      case 'meetering_mode':
         params.push('-mm');
         params.push(body[variable]);
         break;
@@ -135,6 +135,9 @@ function raspistill(params, outputstream) {
   winston.profile('raspistill');
   var cmd = spawn(config.photocommand, params);
   cmd.stdout.pipe(outputstream);
+  cmd.stderr.on('data', function (data) {
+    winston.info('Error' + data.toString());
+  });
   winston.profile('raspistill');
 }
 
