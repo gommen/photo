@@ -1,8 +1,29 @@
 body {
-  padding: 50px;
+  padding: 10%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
+label {
+  display: block;
+  float: left;
+  line-height: 1.6;
+  margin-right: 10px;
+  text-align: right;
+  width: 200px;
+}
+
+form p {
+  clear: both;
+  padding: 0;
+}
+
+
+.parameter_group {
+  width: 60%;
+  padding: 1em;
+  border:1px solid;
+  border-radius:10px;
+};

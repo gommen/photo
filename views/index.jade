@@ -1,83 +1,77 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Raspberry cameraboard still
   div#photo_parameters
     form(name='photoattr', action='/takephoto', method='post')
-      label(for='width') Width:
-      input(type='text', name='width', id='width', value='1024')
-      br
-      label(for='height') Height:
-      input(type='text', name='height', id='height', value='768')
-      br
-      input(type='checkbox', name='hflip', value='on', cheked=undefined) 
-      span horizontal flip
-      br
-      input(type='checkbox', name='vflip', value='on', checked=undefined) 
-      span vertical flip
-      br
-      input(type='checkbox', name='vstab', value='on', checked=undefined) 
-      span Video stablisation
-      br
-      hr
-      label(for='sharpness') Sharpness(-100 to 100)
-      input(type='range', name='sharpness', id='sharpness', min='-100', max='100', value='0')
-      br
-
-      label(for='contrast') Contrast(-100 to 100)
-      input(type='range', name='contrast', id = 'contrast', min='-100', max='100', value='0')
-      br
-
-      label(for='ev') Ev(-x to x)
-      input(type='range', name='ev', id = 'ev', min='-20', max='20', value='0')
-      br
-
-      label(for='brightness') Brightness(0 to 100)
-      input(type='range', name='brightness', id = 'brightness', min='0', max='100', value='50')
-      br
-
-      label(for='saturation') Saturation(-100 to 100)
-      input(type='range', name='saturation', id = 'saturation', min='-100', max='100', value='0')
-      br
-
-      label(for='ISO') ISO
-      input(type='text', name='ISO', id = 'ISO', value='200')
-      br
-
-      label(for='rotation') Rotation(0 to 359)
-      input(type='range', name='rotation', id = 'rotation', min='0', max='359', value='0')
-      br
-      label(for='awb_mode') awb
-      select(name='awb_mode', id='awb_mode')
-        option(value='')
-        each awb_mode in awb_modes
-          option(value=awb_mode) #{awb_mode}
-      br
-      label(for='image_effect') Image effects
-      select(name='image_effect', id='image_effect')
-        option(value='')
-        each image_fx in image_effects
-          option(value=image_fx) #{image_fx}
-      br
-      label(for='exposure_mode') Exposure mode
-      select(name='exposure_mode', id='exposure_mode')
-        option(value='')
-          each exposure_mode in exposure_modes
-            option(value=exposure_mode) #{exposure_mode}
-      br
-      label(for='meetering_mode') Meetering mode
-      select(name='meetering_mode', id='meetering')
-        option(value='')
-          each meetering_mode in meetering_modes
-            option(value=meetering_mode) #{meetering_mode}
-      br
+      h3 Image size parameters
+      div#image_size.parameter_group
+        p
+          label(for='width') Width:
+          input(type='text', name='width', id='width', value='1024')
+        p
+          label(for='height') Height:
+          input(type='text', name='height', id='height', value='768')
+        p
+          label(for='hflip') horizontal flip 
+          input(type='checkbox', name='hflip', value='on', cheked=undefined) 
+        p
+          label(for='vflip') vertical flip
+          input(type='checkbox', name='vflip', value='on', checked=undefined) 
         
+      h3 Exposure parameters
+      div#exposure_variables.parameter_group
+        p
+          label(for='vstab') Video stablisation
+          input(type='checkbox', name='vstab', value='on', checked=undefined) 
+        p
+          label(for='ev') Ev(-20 to 20):
+          input(type='range', name='ev', id = 'ev', min='-20', max='20', value='0')
+        p
+          label(for='ISO') ISO:
+          input(type='text', name='ISO', id = 'ISO', value='200')
+        p
+          label(for='awb_mode') AWB:
+          select(name='awb_mode', id='awb_mode')
+            option(value='')
+            each awb_mode in awb_modes
+              option(value=awb_mode) #{awb_mode}
+        p
+          label(for='exposure_mode') Exposure mode:
+          select(name='exposure_mode', id='exposure_mode')
+            option(value='')
+              each exposure_mode in exposure_modes
+                option(value=exposure_mode) #{exposure_mode}
+        p
+          label(for='meetering_mode') Meetering mode:
+          select(name='meetering_mode', id='meetering')
+            option(value='')
+              each meetering_mode in meetering_modes
+                option(value=meetering_mode) #{meetering_mode}
+        
+      h3 Image manipulation
+      div#image_manipulation.parameter_group
+        p
+          label(for='sharpness') Sharpness(-100 to 100)
+          input(type='range', name='sharpness', id='sharpness', min='-100', max='100', value='0')
+        p
+          label(for='contrast') Contrast(-100 to 100)
+          input(type='range', name='contrast', id = 'contrast', min='-100', max='100', value='0')
+        p
+          label(for='brightness') Brightness(0 to 100)
+          input(type='range', name='brightness', id = 'brightness', min='0', max='100', value='50')
+        p 
+          label(for='saturation') Saturation(-100 to 100)
+          input(type='range', name='saturation', id = 'saturation', min='-100', max='100', value='0')
+        p
+          label(for='rotation') Rotation(0 to 359)
+          input(type='range', name='rotation', id = 'rotation', min='0', max='359', value='0')
+        p
+          label(for='image_effect') Image effects
+          select(name='image_effect', id='image_effect')
+            option(value='')
+            each image_fx in image_effects
+              option(value=image_fx) #{image_fx}
+      input(type='reset', value='Reset')        
       input(type='submit', value='Submit')
-
-div
-  //-awb, --awb  : Set AWB mode (see Notes)
-  //-ifx, --imxfx  : Set image effect (see Notes)
-  //-cfx, --colfx  : Set colour effect (U:V)
-  //-mm, --metering  : Set metering mode (see Notes)
 
