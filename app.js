@@ -34,8 +34,6 @@ if ('development' == app.get('env')) {
  winston.add(winston.transports.File, { filename: 'photo.log', timestamp:true});
 
 app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/photo', raspistill.take_photo);
 app.post('/takephoto', raspistill.take_photo);
 
 

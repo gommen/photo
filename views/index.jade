@@ -4,13 +4,13 @@ block content
   h1 Raspberry cameraboard still
   div#photo_parameters
     form(name='photoattr', action='/takephoto', method='post')
-      h3 Image size parameters
-      div#image_size.parameter_group
+      fieldset#image_size.parameter_group
+        legend Image sixe parameters
         p
-          label(for='width') Width:
+          label(for='width') Width
           input(type='text', name='width', id='width', value='1024')
         p
-          label(for='height') Height:
+          label(for='height') Height
           input(type='text', name='height', id='height', value='768')
         p
           label(for='hflip') horizontal flip 
@@ -19,38 +19,38 @@ block content
           label(for='vflip') vertical flip
           input(type='checkbox', name='vflip', value='on', checked=undefined) 
         
-      h3 Exposure parameters
-      div#exposure_variables.parameter_group
+      fieldset#exposure_variables.parameter_group
+        legend Exposure parameters
         p
           label(for='vstab') Video stablisation
           input(type='checkbox', name='vstab', value='on', checked=undefined) 
         p
-          label(for='ev') Ev(-20 to 20):
+          label(for='ev') Ev(-20 to 20)
           input(type='range', name='ev', id = 'ev', min='-20', max='20', value='0')
         p
-          label(for='ISO') ISO:
+          label(for='ISO') ISO
           input(type='text', name='ISO', id = 'ISO', value='200')
         p
-          label(for='awb_mode') AWB:
+          label(for='awb_mode') AWB
           select(name='awb_mode', id='awb_mode')
             option(value='')
             each awb_mode in awb_modes
               option(value=awb_mode) #{awb_mode}
         p
-          label(for='exposure_mode') Exposure mode:
+          label(for='exposure_mode') Exposure mode
           select(name='exposure_mode', id='exposure_mode')
             option(value='')
               each exposure_mode in exposure_modes
                 option(value=exposure_mode) #{exposure_mode}
         p
-          label(for='meetering_mode') Meetering mode:
+          label(for='meetering_mode') Meetering mode
           select(name='meetering_mode', id='meetering')
             option(value='')
               each meetering_mode in meetering_modes
                 option(value=meetering_mode) #{meetering_mode}
         
-      h3 Image manipulation
-      div#image_manipulation.parameter_group
+      fieldset#image_manipulation.parameter_group
+        legend Image manipulation
         p
           label(for='sharpness') Sharpness(-100 to 100)
           input(type='range', name='sharpness', id='sharpness', min='-100', max='100', value='0')
