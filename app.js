@@ -35,6 +35,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.post('/takephoto', raspistill.take_photo);
+app.get('/preview', raspistill.preview);
 
 
 http.createServer(app).listen(app.get('port'), function(){

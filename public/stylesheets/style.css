@@ -1,7 +1,8 @@
 body {
-  padding: 10%;
+  padding: 5%;
   padding-top: 1%;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Inconsolata', sans-serif;
+/*  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
 }
 
 a {
@@ -15,13 +16,13 @@ label {
   display: block;
   float: left;
   line-height: 1.6;
-  margin-right: 10px;
+  margin-right: 0.8em;
   text-align: right;
-  width: 200px;
+  width: 10em;
 }
 
 input[type='text'], select {
-  width: 150px;
+  width: 8em;
 }
 
 input[type='text']:focus, select:focus {
@@ -33,11 +34,34 @@ form p {
   padding: 0;
 }
 
+#cnt {
+  clear: both;
+}
 
 .parameter_group {
-  width: 50%;
+  width: 25em;
   padding: 1em;
   border:1px solid;
   border-radius:10px;
+}
 
-};
+#photo_parameters {
+  float:left;
+}
+
+#abc {
+  float:left;
+  padding: 1em;
+  margin: 0.55em;
+  border:1px solid;
+  border-radius:10px;
+  width: 512px;
+  height: 384px;
+}
+
+#abc img {
+
+}
+/*font-family: 'Fauna One', serif;
+font-family: 'Inconsolata', sans-serif;
+*/

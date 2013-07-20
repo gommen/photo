@@ -119,13 +119,13 @@ function parse_request_body(body) {
         }
         break;
       case 'exposure_mode':
-         if (body[variable] !== '') {
+        if (body[variable] !== '') {
           params.push('-ex');
           params.push(body[variable]);
         }
         break;
       case 'meetering_mode':
-         if (body[variable] !== '') {
+        if (body[variable] !== '') {
           params.push('-mm');
           params.push(body[variable]);
         }
@@ -141,6 +141,7 @@ function parse_request_body(body) {
 
 function raspistill(params, outputstream) {
   winston.profile('raspistill');
+  winston.info('parameters: ' + params.toString());
   var cmd = spawn(config.photocommand, params);
   cmd.stdout.pipe(outputstream);
   cmd.stderr.on('data', function (data) {
@@ -161,7 +162,23 @@ function handle_photo(req, res) {
   winston.profile('handle_photo');
 }
 
+function preview_photo(req, res) {
+  winston.profile('preview_photo');
+  //Set the header
+  res.writeHead(200, {'Content-Type': 'image/jpg'});
+  //parse the query-string
+  var params = parse_request_body(req.query);
+  params.push('-w', '512');
+  params.push('-h', '384');
+  winston.info(params.toString());
+  raspistill(params, res);
+
+  winston.profile('preview_photo');
+}
+
 exports.take_photo = handle_photo;
+exports.preview = preview_photo;
+
 exports.test = function (req, res) {
   var params = parse_request_body(req.body);
   winston.info('width:' + req.body.width);
